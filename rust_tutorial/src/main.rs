@@ -7,6 +7,7 @@ use std::collections::HashMap;
 // using modules
 mod restaurant;
 use crate::optionals::is_opt;
+use crate::optionals::is_err;
 use crate::restaurant::order_pizza;
 
 mod optionals; // each file is actually a module
@@ -363,6 +364,22 @@ if is_opt("X".to_string()).is_some(){
     println!("{}", is_opt("M".to_string()).unwrap())
 }else{
     println!("No data seen!!")
+}
+
+let g = is_err("G".to_string());
+
+match g {
+    Ok(b) => println!("Valid gender: {}", b),
+    Err(e) => println!("Invalid gender:{}",e)
+}
+
+println!("Using if else--");
+
+let g = is_err("G".to_string());
+if g.is_err(){
+    println!("Invalid data:{}",g.unwrap_err());
+}else{
+    println!("Valid data:{}",g.unwrap());
 }
 
 }
