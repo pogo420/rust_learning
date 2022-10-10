@@ -6,7 +6,10 @@ use std::collections::HashMap;
 
 // using modules
 mod restaurant;
+use crate::optionals::is_opt;
 use crate::restaurant::order_pizza;
+
+mod optionals; // each file is actually a module
 
 
 fn my_fun(i: u32, j: u32) -> u32 {
@@ -354,5 +357,12 @@ let f = |i: u8, s: &str|-> String {
 // Format creates a string
 let s = format!("Hello {} How are you?, you have INR:{}", "Sam", 45);
 println!("{}", s);
+
+
+if is_opt("X".to_string()).is_some(){
+    println!("{}", is_opt("M".to_string()).unwrap())
+}else{
+    println!("No data seen!!")
+}
 
 }
