@@ -2,6 +2,11 @@
 use std::{io, ops::Range};
 use rand::Rng;
 use std::cmp::Ordering;
+use std::collections::HashMap;
+
+// using modules
+mod restaurant;
+use crate::restaurant::order_pizza;
 
 
 fn my_fun(i: u32, j: u32) -> u32 {
@@ -205,5 +210,149 @@ println!("{} and {}", v1, v2);
 let l:Vec<i32> = vec![1,34,89,45];
 println!("{}", sum_list(&l));
 
+
+/*
+Ownership is an important concept.
+1. Each value has a variable and its called owner.
+2. Their is only one owner at a time.
+3. When the owner goes out of scope it disappears.
+*/
+let s: String = String::from("Loko is here");
+// let s1: String = s;
+//println!("{}", s)  // s no longer valid
+// We need to clone it to use it
+let s1: String = s.clone();
+println!("{}", s);  // s is valid as its cloned
+
+
+
+/*
+HasMap: Key value
+*/
+let mut map: HashMap<u8, &str> = HashMap::new();
+
+map.insert(1, "ondu");
+map.insert(2, "erudu");
+map.insert(3, "mooru");
+
+for (k, v) in map.iter(){
+    println!("{}-{}", k, v);
+}
+
+println!("Length of map: {}", map.len());
+
+// defining values in one shot
+let dict: HashMap<&str, &str> = HashMap::from([
+    ("ola", "cab"),
+    ("pom", "pompm")
+]);
+
+for (k, v) in dict.iter(){
+    println!("{}-{}", k, v);
+}
+
+
+/*
+Struct + Traits : Can be used for creating adaptors
+Struct -> c like. Class.
+Traits -> function implementation.
+ */
+
+trait DbAdaptor {
+    fn new(user: String, pass: String, url: String) -> Self;
+    fn connec(&self) -> String;
+    fn alive(&self) -> u8;
+}
+
+
+struct Dbx {
+    user_name: String,
+    password: String,
+    url: String
+}
+
+struct DbA {
+    user_name: String,
+    password: String,
+    url: String
+}
+
+impl DbAdaptor for Dbx {
+
+    fn new(user: String, pass: String, url: String) -> Self {
+        return Dbx{user_name: user, password: pass, url: url};
+    }
+
+    fn connec(&self) -> String {
+
+        let mut s: String = String::new();
+        s.push_str(&self.url);
+        s.push('-');
+        s.push_str(&self.user_name);
+        s.push('-');
+        s.push_str(&self.password);
+ 
+        return s;
+    }
+
+    fn alive(&self) -> u8 {
+        return 2;
+    }
+}
+
+impl DbAdaptor for DbA {
+
+    fn new(user: String, pass: String, url: String) -> Self {
+        return DbA{user_name: user, password: pass, url: url};
+    }
+
+    fn connec(&self) -> String {
+
+        let mut s: String = String::new();
+        s.push_str(&self.url);
+        s.push('*');
+        s.push_str(&self.user_name);
+        s.push('*');
+        s.push_str(&self.password);
+ 
+        return s;
+    }
+
+    fn alive(&self) -> u8 {
+        return 4;
+    }
+}
+
+let dbx: Dbx = DbAdaptor::new("ola".to_string(), "Sam".to_string(), "dbx.url.co.in".to_string());
+let dba: DbA = DbAdaptor::new("ola".to_string(), "Sam".to_string(), "dba.url.co.in".to_string());
+
+println!("Dbx: {}-{}", dbx.connec(), dbx.alive());
+println!("Dba: {}-{}", dba.connec(), dba.alive());
+
+
+let p = order_pizza();
+println!("{}",p.string());
+
+
+/*
+Closures: High level functions
+
+let f = |parameters|-> return_type {BODY}
+*/
+
+
+let f = |i: u8, s: &str|-> String {
+    let mut s1 = String::new();
+    s1.push_str(&s);
+    s1.push_str(&(i.to_string()));
+    return s1;
+    };
+
+    println!("{}", f(32, "Ola"));
+
+
+// Format creates a string
+let s = format!("Hello {} How are you?, you have INR:{}", "Sam", 45);
+println!("{}", s);
 
 }
