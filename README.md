@@ -1,5 +1,10 @@
 # rust_learning
-Learning rust 
+### New rust project:
+* Creating: `cargo new <project_name>`
+* Building(navigate inisde project): `cargo build`
+* Executing(navigate inisde project): `cargo run`
+
+### Important links
 
 * Rust by [example](https://doc.rust-lang.org/rust-by-example/index.html).
 * Practical [course](https://rust-classes.com/preface.html).
