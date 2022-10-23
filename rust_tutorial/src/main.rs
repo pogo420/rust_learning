@@ -12,6 +12,8 @@ use crate::restaurant::order_pizza;
 
 mod optionals; // each file is actually a module
 
+mod traits_check;
+use crate::traits_check::{AnimalSound, Horse, Pig};
 
 fn my_fun(i: u32, j: u32) -> u32 {
     return i+j;
@@ -332,6 +334,14 @@ let dba: DbA = DbAdaptor::new("ola".to_string(), "Sam".to_string(), "dba.url.co.
 
 println!("Dbx: {}-{}", dbx.connec(), dbx.alive());
 println!("Dba: {}-{}", dba.connec(), dba.alive());
+
+// traits revisit
+// Based on the variable typle associated implementation is used
+let horse: Horse = AnimalSound::new();
+let pig: Pig = AnimalSound::new();
+
+println!("{}-{}", horse.get_sound(), pig.get_sound());
+
 
 
 let p = order_pizza();
