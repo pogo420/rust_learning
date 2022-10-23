@@ -4,6 +4,9 @@
 * Building(navigate inisde project): `cargo build`
 * Executing(navigate inisde project): `cargo run`
 
+### Preferred module organization:
+* Check the stackoverflow [link](https://stackoverflow.com/a/68972967/5739950).
+
 ### Important links
 
 * Rust by [example](https://doc.rust-lang.org/rust-by-example/index.html).
