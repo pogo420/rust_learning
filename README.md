@@ -16,4 +16,4 @@
 * Traits in [details](https://doc.rust-lang.org/book/ch10-02-traits.html).
 * Practical [traits](https://learning-rust.github.io/docs/impls-and-traits/). Check trait objects for adapters.
 * Custom [errors](https://learning-rust.github.io/docs/e7.custom_error_types.html).
-* self vs Self in traits/etc [link](https://stackoverflow.com/a/32306132/5739950).
+* `self` vs `Self` in traits/etc [link](https://stackoverflow.com/a/32306132/5739950).
