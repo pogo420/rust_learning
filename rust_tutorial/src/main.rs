@@ -15,6 +15,12 @@ mod optionals; // each file is actually a module
 mod traits_check;
 use crate::traits_check::{AnimalSound, Horse, Pig};
 
+
+mod custom_exception;
+use custom_exception::error_gen_1;
+use custom_exception::error_gen_2;
+
+
 fn my_fun(i: u32, j: u32) -> u32 {
     return i+j;
 }
@@ -369,6 +375,9 @@ let f = |i: u8, s: &str|-> String {
 let s = format!("Hello {} How are you?, you have INR:{}", "Sam", 45);
 println!("{}", s);
 
+/* 
+ * Optional and Result operators to manage exception in rust.
+ */
 
 if is_opt("X".to_string()).is_some(){
     println!("{}", is_opt("M".to_string()).unwrap())
@@ -391,5 +400,18 @@ if g.is_err(){
 }else{
     println!("Valid data:{}",g.unwrap());
 }
+
+/*
+ * Custom exceptions
+ */
+
+ if error_gen_1(1).is_err(){
+    println!("Custom error: {}", error_gen_1(1).unwrap_err());
+ }
+
+ if error_gen_2(1).is_err(){
+    println!("Custom error: {}", error_gen_2(1).unwrap_err());
+ }
+
 
 }
