@@ -1,4 +1,6 @@
 # rust_learning
+### Personal notes
+* check the [wiki](https://github.com/pogo420/rust_learning/wiki)
 ### New rust project:
 * Creating: `cargo new <project_name>`
 * Building(navigate inisde project): `cargo build`
