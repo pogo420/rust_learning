@@ -20,6 +20,9 @@ mod custom_exception;
 use custom_exception::error_gen_1;
 use custom_exception::error_gen_2;
 
+mod mutability_check;
+use mutability_check::check_vec_mut;
+
 
 fn my_fun(i: u32, j: u32) -> u32 {
     return i+j;
@@ -413,5 +416,15 @@ if g.is_err(){
     println!("Custom error: {}", error_gen_2(1).unwrap_err());
  }
 
+
+ /*
+ Checking mutability concept
+
+ Mutability is a property of either a borrow (&mut) or a binding (let mut). 
+ This means that, for example, you cannot have a struct with some fields mutable and some immutable.
+ If a complex data type is binded as mut then nested data types are mut as well.
+ */
+
+check_vec_mut();
 
 }
