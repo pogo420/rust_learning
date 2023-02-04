@@ -1,4 +1,5 @@
-#![allow(unused)] // suppress waring of unused variables
+#![allow(unused)] use std::sync::mpsc;
+// suppress waring of unused variables
 use std::{io, ops::Range};
 use rand::Rng;
 use std::cmp::Ordering;
@@ -22,6 +23,10 @@ use custom_exception::error_gen_2;
 
 mod mutability_check;
 use mutability_check::check_vec_mut;
+
+mod concurrency_concept;
+use concurrency_concept::{check_thread, process_url};
+use std::thread;
 
 
 fn my_fun(i: u32, j: u32) -> u32 {
@@ -426,5 +431,38 @@ if g.is_err(){
  */
 
 check_vec_mut();
+
+
+/* 
+Thread logic 
+*/
+
+let handle = check_thread();
+handle.join().unwrap(); // waits for all spawned thread to complete after main thread is completed
+// Add it immediately after the span thread so that all the spanned will be closed before proceeding further.
+
+/*
+mpsc -> multi producer / multi consumer
+*/
+let (tx, rx) = mpsc::channel();
+
+let urls = vec![
+    String::from("ola"),
+    String::from("Hello"),
+    String::from("Hi"),
+    String::from("Namaste")
+];
+
+for i in urls{
+    let tx2 = tx.clone();
+    thread::spawn( move || {
+            process_url(i, tx2)  // we are sending the tx, after processing we are sending data via tx from thread.
+        });
+}
+
+for r in rx{
+    println!("Data received: {}", r);
+}
+
 
 }
