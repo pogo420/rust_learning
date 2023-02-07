@@ -460,6 +460,8 @@ for i in urls{
         });
 }
 
+drop(tx); // manually drop the main sender, sender in spawnned threads are dropped automatically
+
 for r in rx{
     println!("Data received: {}", r);
 }
